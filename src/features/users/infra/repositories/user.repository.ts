@@ -40,11 +40,7 @@ export class UserRepository {
       uid: entity.uid,
       nome: entity.nome,
       senha: entity.senha,
-      mensagens: entity.mensagens?.map((mensagem) => ({
-        uid: mensagem.uid,
-        descricao: mensagem.descricao,
-        detalhamento: mensagem.detalhamento,
-      })),
+      mensagens: [],
     };
   }
 }

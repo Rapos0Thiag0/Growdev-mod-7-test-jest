@@ -33,10 +33,32 @@ describe("POST /signup", () => {
       .expect(async (res) => {
         expect(res.body.uid).toBeTruthy;
         expect(res.body.nome).toBeTruthy;
+        expect(res.body.mensagens).toBeTruthy;
+        expect(res.body.mensagens).toStrictEqual([]);
         expect(res.body.nome).toBe("Qualquer_nome");
         expect(res.body.senha).toBe("321321321");
         expect(Number(res.body.senha)).toBeGreaterThan(99999999);
         expect(Number(res.body.senha)).toBeLessThan(999999999999);
+      });
+  });
+  test("Deve retornar 500 após criar um novo usuário", async () => {
+    await request(server)
+      .post("/signup")
+      .send({
+        nome: "Qualquer_nome",
+        senha: "321321321",
+      })
+      .expect(500)
+      .expect(async (res) => {
+        console.log(res);
+        // expect(res.body.uid).toBeTruthy;
+        // expect(res.body.nome).toBeTruthy;
+        // expect(res.body.mensagens).toBeTruthy;
+        // expect(res.body.mensagens).toStrictEqual([]);
+        // expect(res.body.nome).toBe("Qualquer_nome");
+        // expect(res.body.senha).toBe("321321321");
+        // expect(Number(res.body.senha)).toBeGreaterThan(99999999);
+        // expect(Number(res.body.senha)).toBeLessThan(999999999999);
       });
   });
 
